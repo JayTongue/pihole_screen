@@ -25,3 +25,7 @@ The pinning connections used are from [PiUpMyLife](https://pimylifeup.com/raspbe
     12. Pin 16 (LED -) goes to the ground rail.
 
 ![](schematic.jpeg)
+
+Note that the pi has a ton of GPIO pins which can be substituted, so you can use whichever ones you want. Just change it in the code.
+
+I also added an additional potentiometer as a variable resistor so I could dim the LED backlight, since, in a dark room, full brightness on the LCD1602 is way too bright. 
