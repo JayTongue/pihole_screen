@@ -50,10 +50,11 @@ summary = json.loads(requests.request("GET", url_block, headers=headers, data=pa
 blocked = summary["queries"]["blocked"]
 
 temp_output = subprocess.check_output(["vcgencmd", "measure_temp"]).decode("utf-8")
-temp = f"{int(int(temp_output.replace('temp=', '')[:-5])*(9/5)+32)}\xDF"
+#temp = f"{int(int(temp_output.replace('temp=', '')[:-5])*(9/5)+32)}\xDF" # Toggle for Fahrenheit
+temp = f"{int(temp_output.replace('temp=', '')[:-5])}\xDF" # Toggle for Celcius
 
 top_string = "TEMP RAM BLKD  "
-bottom_string = f'{temp:{4}} {ram_use:{3}} {blocked:{5}}'
+bottom_string = f'{temp:>4} {ram_use:>3} {blocked:>5}'
 
 lcd.clear()
 lcd.cursor_position(2, 0)
