@@ -33,11 +33,12 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 pwd = 'PASSWORD' # replace with your password
 auth_payload = {"password": pwd}
-url_auth = 'https://pi.hole/api/auth'
-url_sys = 'https://pi.hole/api/info/system'
-url_block = 'https://pi.hole/api/stats/summary'
+base = 'http://192.168.0.1' #REPLACE with your pihole's IP address
+url_auth = f'{base}/api/auth'
+url_sys = f'{base]/api/info/system'
+url_block = f'{base}/api/stats/summary'
 
-response = json.loads(requests.request("POST", url_auth, json=auth_payload, verify=False).text)
+response = json.loads(requests.post(url_auth, json=auth_payload, verify=False).text)
 sid, csrf = response['session']['sid'], response['session']['csrf']
 
 payload = {}
@@ -71,4 +72,4 @@ lcd.message = '\x02'
 lcd.cursor_position(1, 1)
 lcd.message = '\x03'
 
-delete = requests.request("DELETE", url_auth, headers=headers, data=payload, verify=False)
+delete = requests.delete(url_auth, headers=headers, data=payload, verify=False)
